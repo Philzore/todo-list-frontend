@@ -1,4 +1,8 @@
+
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -6,10 +10,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  email:string = '';
-  password:string = '';
+  username: string = '';
+  password: string = '';
 
-  login() {
-    //logic for backend
+  constructor(private authService : AuthService) {}
+
+  async login() {
+    try {
+      let resp = await this.authService.loginWithUsernameAndPassword(this.username, this.password);
+      console.log(resp);
+    } catch(err) {
+      console.log('error :' , err) ;
+    }
   }
+
+  
 }
