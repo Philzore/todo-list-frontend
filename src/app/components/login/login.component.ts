@@ -21,7 +21,8 @@ export class LoginComponent {
 
   async login() {
     try {
-      let resp = await this.authService.loginWithUsernameAndPassword(this.username, this.password);
+      let resp:any = await this.authService.loginWithUsernameAndPassword(this.username, this.password);
+      localStorage.setItem('token', resp['token'])
       this.router.navigateByUrl('/todos');
     } catch(err) {
       console.log('error :' , err) ;
